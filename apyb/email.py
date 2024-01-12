@@ -8,7 +8,6 @@ GMAIL_SMTP_PORT = 465
 EMAIL_NO_REPLY = "noreply@python.org.br"
 
 
-
 def build_message(
     from_email: str, to_email: str, subject: str, html_body: str
 ) -> MIMEMultipart:

@@ -16,7 +16,8 @@ def get_discussion(github: Client, discussion_id: int) -> dict:
         discussion_id (int): The ID of the discussion.
 
     Returns:
-        dict: A dictionary containing the discussion details, including title, URL, and body HTML.
+        dict: A dictionary containing the discussion details, 
+            including title, URL, and body HTML.
     """
     query = """{{
         repository(owner: "{owner}", name: "{name}") {{
@@ -44,10 +45,16 @@ def get_discussion(github: Client, discussion_id: int) -> dict:
     help="Password for the noreply@ email",
 )
 @click.option(
-    "--token", required=True, envvar="APYB_BOT_GITHUB_TOKEN", help="GitHub API token"
+    "--token",
+    required=True,
+    envvar="APYB_BOT_GITHUB_TOKEN",
+    help="GitHub API token",
 )
 @click.option(
-    "--send-to", required=True, envvar="APYB_BOT_SEND_TO", help="Discussion ID number"
+    "--send-to",
+    required=True,
+    envvar="APYB_BOT_SEND_TO",
+    help="Discussion ID number",
 )
 @click.option("--id", type=int, required=True, help="Discussion ID number")
 def new_discussion_notification(
