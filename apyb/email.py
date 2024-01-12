@@ -8,12 +8,6 @@ GMAIL_SMTP_PORT = 465
 EMAIL_NO_REPLY = "noreply@python.org.br"
 
 
-def smtp_connection(username: str, password: str):
-    connection = smtplib.SMTP(GMAIL_SMTP_SERVER, GMAIL_SMTP_PORT)
-    connection.starttls()
-    connection.login(username, password)
-    return connection
-
 
 def build_message(
     from_email: str, to_email: str, subject: str, html_body: str
