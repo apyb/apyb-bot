@@ -8,14 +8,21 @@ GMAIL_SMTP_PORT = 465
 EMAIL_NO_REPLY = "noreply@python.org.br"
 
 
-def smtp_connection(username: str, password: str):
-    connection = smtplib.SMTP(GMAIL_SMTP_SERVER, GMAIL_SMTP_PORT)
-    connection.starttls()
-    connection.login(username, password)
-    return connection
+def build_message(
+    from_email: str, to_email: str, subject: str, html_body: str
+) -> MIMEMultipart:
+    """
+    Builds an email message with the specified parameters.
 
+    Args:
+        from_email (str): The sender's email address.
+        to_email (str): The recipient's email address.
+        subject (str): The subject of the email.
+        html_body (str): The HTML body of the email.
 
-def build_message(from_email: str, to_email: str, subject: str, html_body: str):
+    Returns:
+        message (MIMEMultipart): The constructed email message.
+    """
     message = MIMEMultipart()
     message["From"] = from_email
     message["To"] = to_email
@@ -26,7 +33,24 @@ def build_message(from_email: str, to_email: str, subject: str, html_body: str):
     return message
 
 
-def send_email_as_no_reply(to_email: str, subject: str, body: str, smtp_password: str):
+def send_email_as_no_reply(
+    to_email: str,
+    subject: str,
+    body: str,
+    smtp_password: str,
+) -> None:
+    """
+    Sends an email as a no-reply email address.
+
+    Args:
+        to_email (str): The recipient's email address.
+        subject (str): The subject of the email.
+        body (str): The body of the email.
+        smtp_password (str): The password for the SMTP server.
+
+    Returns:
+        None
+    """
     message = build_message(EMAIL_NO_REPLY, to_email, subject, body)
 
     context = ssl.create_default_context()
